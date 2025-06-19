@@ -132,27 +132,30 @@ struct YourTurnView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
                 YourTurnCardView(
-                    gradient: LinearGradient(colors: [.green, .purple], startPoint: .topLeading, endPoint: .bottomTrailing),
+                    gradient: LinearGradient(colors: [.green, .purple, .black], startPoint: .topLeading, endPoint: .bottomTrailing),
                     name: "Amanda, 22",
-                    question: "What is your most favorite childhood memory?"
+                    question: "What is your most favorite childhood memory?",
+                    label: nil // No label for Amanda
                 )
                 YourTurnCardView(
                     gradient: LinearGradient(colors: [.brown, .black], startPoint: .topLeading, endPoint: .bottomTrailing),
                     name: "Malte, 31",
-                    question: "The most important quality in friendships to you?"
+                    question: "The most important quality in friendships to you?",
+                    label: "🗣️ They made a move" // Show this label only for Malte
                 )
-                // Add more cards as needed
             }
             .padding(.horizontal)
         }
     }
 }
 
+
 /// A single card displaying the prompt and user identity with a gradient background.
 struct YourTurnCardView: View {
     let gradient: LinearGradient
     let name: String
     let question: String
+    let label: String?
 
     var body: some View {
         RoundedRectangle(cornerRadius: 20)
@@ -160,6 +163,22 @@ struct YourTurnCardView: View {
             .frame(width: 200, height: 250)
             .overlay(
                 VStack {
+                    // Top label area – fixed height for alignment
+                    ZStack {
+                        if let label = label {
+                            Text(label)
+                                .font(.caption)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 4)
+                                .background(Color.black)
+                                .clipShape(Capsule())
+                        }
+                    }
+                    .frame(height: 24) // Match this height across all cards
+
+                    Spacer()
+
                     Text("Tap to answer")
                         .font(.subheadline)
                         .foregroundColor(.white)
@@ -180,6 +199,7 @@ struct YourTurnCardView: View {
             )
     }
 }
+
 
 /*
  We use gradient backgrounds to differentiate cards visually.
