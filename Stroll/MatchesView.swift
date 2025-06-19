@@ -304,11 +304,22 @@ struct ChatRow: View {
                         .fill(Color(#colorLiteral(red: 0.832, green: 0.646, blue: 1, alpha: 1)))
                         .frame(width: 20, height: 20)
                         .overlay(
-                            Text("\(chat.unreadCount)")
-                                .font(.caption2)
-                                .foregroundColor(.black)
+                            Group {
+                                if chat.name == "Jessica" {
+                                    Image(systemName: "star.fill")
+                                        .font(.system(size: 10))
+                                        .foregroundColor(.black)
+                                } else {
+                                    Text("\(chat.unreadCount)")
+                                        .font(.caption2)
+                                        .foregroundColor(.black)
+                                }
+                            }
                         )
                 }
+
+                
+                
             }
         }
     }
@@ -335,7 +346,7 @@ struct Chat: Identifiable {
 
 /// Preview/test data for chat UI.
 let chatData = [
-    Chat(name: "Jessica", message: "🔈 00.58", time: "6:21 pm", imageName: "jessica", status: "· New chat", unreadCount: 0),
+    Chat(name: "Jessica", message: "🔈 00.58", time: "6:21 pm", imageName: "jessica", status: "· New chat", unreadCount: 1),
     Chat(name: "Amanda", message: "Lol I love house music too", time: "6:21 pm", imageName: "amanda", status: "Your move", unreadCount: 0),
     Chat(name: "Sila", message: "You: I love the people there tbh, have you been?", time: "Wed", imageName: "sila", status: nil, unreadCount: 0),
     Chat(name: "Marie", message: "Hahaha that’s interesting...", time: "6:21 pm", imageName: "marie", status: "Your move", unreadCount: 4)
