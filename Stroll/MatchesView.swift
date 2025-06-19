@@ -5,6 +5,18 @@
 //  Created by Pieter Yoshua Natanael on 19/06/25.
 //
 
+
+/*
+This SwiftUI file builds a "Matches" screen like you’d see in a dating or chat app. It includes:
+
+A header
+A horizontal list of cards (people waiting for your response)
+A list of recent chat messages
+Nice design elements like gradients, profile pictures, and unread message badges
+
+*/
+
+
 import SwiftUI
 
 // MARK: - Main Matches Screen
@@ -27,9 +39,23 @@ struct MatchesView: View {
     }
 }
 
+/*
+ This is the main screen — like the homepage for the Matches feature.
+ 
+ Contains:
+ - HeaderView() – top section with title and profile image
+ - YourTurnView() – horizontal swipeable prompt cards
+ - ChatsView() – recent chat list
+ 
+ Why VStack + ScrollView:
+ VStack stacks vertically, ScrollView enables scrolling content.
+ We use a black background to match dark theme aesthetics.
+*/
+
+
 // MARK: - Header Section
 
-/// Displays the "Your Turn" title with a count, profile image with gradient border, and message below.
+/// Displays the "Your Turn" title with a count, profile image with gradient border, and a message below.
 struct HeaderView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -52,10 +78,9 @@ struct HeaderView: View {
 
                 Spacer()
 
-                // Right: Profile image with top gradient border and score
+                // Right: Profile image with top gradient stroke
                 VStack(spacing: 4) {
                     ZStack {
-                        // Outer gradient stroke
                         Circle()
                             .strokeBorder(
                                 LinearGradient(
@@ -70,7 +95,6 @@ struct HeaderView: View {
                             )
                             .frame(width: 60, height: 60)
 
-                        // Inner profile image
                         Image("andrew")
                             .resizable()
                             .scaledToFill()
@@ -78,7 +102,6 @@ struct HeaderView: View {
                             .clipShape(Circle())
                     }
 
-                    // Score below profile
                     Text("90")
                         .font(.caption)
                         .bold()
@@ -86,7 +109,7 @@ struct HeaderView: View {
                 }
             }
 
-            // Subheading
+            // Subheading below title
             Text("Make your move. They are waiting")
                 .font(.subheadline.bold())
                 .foregroundColor(.white.opacity(0.7))
@@ -95,9 +118,15 @@ struct HeaderView: View {
     }
 }
 
+/*
+ The header highlights the user's turn and shows engagement count.
+ Profile picture uses a gradient stroke at the top to emphasize activity.
+*/
+
+
 // MARK: - Horizontal Cards ("Your Turn")
 
-/// Scrollable horizontal cards for unanswered prompts.
+/// A horizontally scrollable list of interactive prompt cards.
 struct YourTurnView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -119,7 +148,7 @@ struct YourTurnView: View {
     }
 }
 
-/// A card displaying a prompt and user name with a custom gradient background.
+/// A single card displaying the prompt and user identity with a gradient background.
 struct YourTurnCardView: View {
     let gradient: LinearGradient
     let name: String
@@ -152,9 +181,15 @@ struct YourTurnCardView: View {
     }
 }
 
+/*
+ We use gradient backgrounds to differentiate cards visually.
+ Using AnyShapeStyle makes this component flexible to different fill styles.
+*/
+
+
 // MARK: - Chats Section
 
-/// Vertical list of chats, showing messages and status.
+/// Displays the user's ongoing and pending chats.
 struct ChatsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -165,7 +200,6 @@ struct ChatsView: View {
                         .font(.title2.bold())
                         .foregroundColor(.white)
 
-                    // Underline
                     Rectangle()
                         .fill(Color.white)
                         .frame(width: 40, height: 2)
@@ -184,12 +218,12 @@ struct ChatsView: View {
                 }
             }
 
-            // Subheading
+            // Section subheading
             Text("The ice is broken. Time to hit it off")
                 .font(.subheadline)
                 .foregroundColor(.white.opacity(0.6))
 
-            // Chat rows
+            // Chat list
             ForEach(chatData) { chat in
                 ChatRow(chat: chat)
             }
@@ -197,13 +231,21 @@ struct ChatsView: View {
     }
 }
 
-/// A single chat row with name, message, time, and unread count badge.
+/*
+ Uses visual stripe indicators to emphasize current tab.
+ Dynamically displays chat rows using sample data.
+*/
+
+
+// MARK: - Chat Row Component
+
+/// Represents one chat preview with profile, message, time, and unread indicator.
 struct ChatRow: View {
     var chat: Chat
 
     var body: some View {
         HStack {
-            // Profile image
+            // Profile picture
             Image(chat.imageName)
                 .resizable()
                 .scaledToFill()
@@ -211,7 +253,6 @@ struct ChatRow: View {
                 .clipShape(Circle())
 
             VStack(alignment: .leading) {
-                // Name and status
                 HStack {
                     Text(chat.name)
                         .font(.headline)
@@ -226,15 +267,13 @@ struct ChatRow: View {
                     }
                 }
 
-                // Message text, faded if read (e.g. Sila)
                 Text(chat.message)
                     .font(.subheadline)
-                    .foregroundColor(.white.opacity(chat.name == "Sila" ? 0.6 : 1.0))
+                    .foregroundColor(.white.opacity(chat.name == "Sila" ? 0.6 : 1.0)) // Faded if read
             }
 
             Spacer()
 
-            // Time and unread badge
             VStack {
                 Text(chat.time)
                     .font(.caption2)
@@ -255,9 +294,15 @@ struct ChatRow: View {
     }
 }
 
-// MARK: - Chat Data Model & Dummy Data
+/*
+ The opacity change on message makes it visually clear which messages are read.
+ Use of color literal ensures consistent styling for unread badges.
+*/
 
-/// Chat data model.
+
+// MARK: - Chat Model + Dummy Data
+
+/// A model for chat previews used in the Matches view.
 struct Chat: Identifiable {
     let id = UUID()
     let name: String
@@ -268,13 +313,14 @@ struct Chat: Identifiable {
     let unreadCount: Int
 }
 
-/// Sample data to populate UI.
+/// Preview/test data for chat UI.
 let chatData = [
     Chat(name: "Jessica", message: "🔈 00.58", time: "6:21 pm", imageName: "jessica", status: "· New chat", unreadCount: 0),
     Chat(name: "Amanda", message: "Lol I love house music too", time: "6:21 pm", imageName: "amanda", status: "Your move", unreadCount: 0),
     Chat(name: "Sila", message: "You: I love the people there tbh, have you been?", time: "Wed", imageName: "sila", status: nil, unreadCount: 0),
     Chat(name: "Marie", message: "Hahaha that’s interesting...", time: "6:21 pm", imageName: "marie", status: "Your move", unreadCount: 4)
 ]
+
 
 // MARK: - Preview
 
