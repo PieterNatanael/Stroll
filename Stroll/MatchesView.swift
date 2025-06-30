@@ -13,6 +13,8 @@ A header
 A horizontal list of cards (people waiting for your response)
 A list of recent chat messages
 Nice design elements like gradients, profile pictures, and unread message badges
+ 
+ The matches view is mockup for job requirements
 
 */
 
