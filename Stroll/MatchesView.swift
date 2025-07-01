@@ -67,6 +67,7 @@ struct HeaderView: View {
                     Text("Your Turn")
                         .font(.title2.bold())
                         .foregroundColor(.white)
+                        .bold()
 
                     Circle()
                         .fill(Color(#colorLiteral(red: 0.832, green: 0.646, blue: 1, alpha: 1)))
