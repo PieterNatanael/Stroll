@@ -68,6 +68,10 @@ struct HeaderView: View {
                         .font(.title2.bold())
                         .foregroundColor(.white)
                         .bold()
+                    Text("New Chat")
+                        .font(.title2.bold())
+                        .foregroundColor(.red)
+                        .bold()
 
                     Circle()
                         .fill(Color(#colorLiteral(red: 0.832, green: 0.646, blue: 1, alpha: 1)))
