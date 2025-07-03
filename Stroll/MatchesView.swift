@@ -112,7 +112,7 @@ struct HeaderView: View {
                     Text("90")
                         .font(.caption)
                         .bold()
-                        .foregroundColor(.white)
+                        .foregroundColor(.red)
                 }
             }
 
