@@ -109,10 +109,36 @@ struct HeaderView: View {
                             .clipShape(Circle())
                     }
 
-                    Text("90")
-                        .font(.caption)
-                        .bold()
-                        .foregroundColor(.red)
+                    ZStack {
+                               // Stroke Layer (outlined text)
+                               Text("90")
+                                   .font(.system(size: 40))
+                                   .bold()
+                                   .foregroundColor(.black)
+                                   .overlay(
+                                       Text("90")
+                                           .font(.system(size: 40))
+                                           .bold()
+                                           .foregroundColor(.clear)
+                                           .overlay(
+                                               LinearGradient(colors: [.black], startPoint: .top, endPoint: .bottom)
+                                                   .mask(
+                                                       Text("90")
+                                                           .font(.system(size: 40))
+                                                           .bold()
+                                                   )
+                                                   .blur(radius: 1)
+                                           )
+                                   )
+
+                               // Fill Layer
+                               Text("90")
+                                   .font(.system(size: 40))
+                                   .bold()
+                                   .foregroundColor(.red)
+                           }
+                    
+                
                 }
             }
 
