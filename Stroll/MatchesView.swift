@@ -117,7 +117,7 @@ struct HeaderView: View {
                                    .foregroundColor(.black)
                                    .overlay(
                                        Text("90")
-                                           .font(.system(size: 40))
+                                           .font(.system(size: 35))
                                            .bold()
                                            .foregroundColor(.clear)
                                            .overlay(
@@ -133,7 +133,7 @@ struct HeaderView: View {
 
                                // Fill Layer
                                Text("90")
-                                   .font(.system(size: 40))
+                                   .font(.system(size: 35))
                                    .bold()
                                    .foregroundColor(.red)
                            }
