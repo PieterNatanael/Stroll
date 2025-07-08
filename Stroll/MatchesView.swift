@@ -146,7 +146,7 @@ struct HeaderView: View {
             Text("Make your move. They are waiting")
                 .font(.subheadline.bold())
                 .foregroundColor(.white.opacity(0.7))
-                .foregroundColor(.red)
+                .foregroundColor(.blue)
         }
         .padding(.horizontal)
     }
