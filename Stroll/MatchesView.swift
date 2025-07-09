@@ -215,7 +215,7 @@ struct YourTurnCardView: View {
 
                     Text("Tap to answer")
                         .font(.subheadline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.red)
 
                     Spacer()
 
