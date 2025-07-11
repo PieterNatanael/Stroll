@@ -255,7 +255,7 @@ struct ChatsView: View {
                         .foregroundColor(.white)
 
                     Rectangle()
-                        .fill(Color.white)
+                        .fill(Color.red)
                         .frame(width: 40, height: 2)
                         .cornerRadius(1)
                 }
